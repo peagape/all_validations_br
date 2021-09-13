@@ -87,6 +87,18 @@ class AllValidations {
     return hasMatch(s, r'^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$');
   }
 
+  /// Checks if string is base64.
+  static bool isBase64(String s) {
+    if (s.length < 4) return false;
+    return hasMatch(s, r'^[+]*([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)$');
+  }
+  
+  /// Checks if string is JSON.
+  static bool isJSON(String s) {
+    if (s.length < 4) return false;
+    return hasMatch(s, r'^[{\[]{1}([,:{}\[\]0-9.\-+Eaeflnr-u \n\r\t]|".*?")+[}\]]{1}');
+  }
+  
   /// Checks if string is DateTime (UTC or Iso8601).
   static bool isDateTime(String s) =>
       hasMatch(s, r'^\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}:\d{2}.\d{3}Z?$');
